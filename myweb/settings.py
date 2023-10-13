@@ -76,14 +76,14 @@ WSGI_APPLICATION = 'myweb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
+        'NAME': 'postgres',
+        'HOST': 'db.eafnhldbkpirnxglpxac.supabase.co',
+        'PASSWORD': 'XDAdF6cAk&BCcyQ',
+        'PORT': '5432',
         'USER': 'postgres',
-        'PASSWORD': 'GzCkMixulXwWnIPYlkex',
-        'HOST': 'containers-us-west-92.railway.app',
-        'PORT': '5526',
+
     }
 }
-
 
 
 # Password validation
