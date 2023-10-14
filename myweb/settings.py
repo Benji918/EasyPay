@@ -16,8 +16,6 @@ import os
 import environ
 
 env = environ.Env()
-# reading .env file
-environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,15 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY', default='django-insecure-t8srpt%nf74inop%soavkk3@0poy8_u=gs4!q%msa8$ns5lwqt')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG', default='True', ) == 'True'
-
-ALLOWED_HOSTS = env('ALLOWED_HOSTS', default='127.0.0.1').split(',')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-g=jzhv5zv8nxar2z0jpv#jv-$o*p(+e597*wgkau$gc&7v*m4e')
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1').split(",")
 
 # Application definition
-
 INSTALLED_APPS = [
     'easypay.apps.EasypayConfig',
     'django.contrib.admin',
@@ -82,7 +76,7 @@ WSGI_APPLICATION = 'myweb.wsgi.application'
 if not DEBUG:
     DATABASES = {
         "default": dj_database_url.config(
-            default=env("DATABASE_URL"), conn_max_age=600
+            default=os.environ.get("DATABASE_URL"), conn_max_age=600
         )
     }
 
@@ -93,7 +87,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-# print(env("DATABASE_URL"))
+# os.environ.get("DATABASE_URL")
 # XDAdF6cAk&BCcyQ
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
