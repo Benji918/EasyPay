@@ -73,20 +73,12 @@ WSGI_APPLICATION = 'myweb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if not DEBUG:
-    DATABASES = {
-        "default": dj_database_url.config(
-            default=os.environ.get("DATABASE_URL"), conn_max_age=600
-        )
-    }
+DATABASES = {
+    "default": dj_database_url.config(
+        default="postgres://postgres:XDAdF6cAk&BCcyQ@db.eafnhldbkpirnxglpxac.supabase.co/postgres", conn_max_age=600
+    )
+}
 
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
 # os.environ.get("DATABASE_URL")
 # XDAdF6cAk&BCcyQ
 # Password validation
