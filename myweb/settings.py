@@ -24,6 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-g=jzhv5zv8nxar2z0jpv#jv-$o*p(+e597*wgkau$gc&7v*m4e')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1').split(",")
+USE_SUPABASE = os.environ.get("USE_SUPABASE_DB", "False") == "True"
 
 # Application definition
 INSTALLED_APPS = [
@@ -70,11 +71,32 @@ WSGI_APPLICATION = 'myweb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": dj_database_url.config(
-        default="postgres://postgres:XDAdF6cAk&BCcyQ@db.eafnhldbkpirnxglpxac.supabase.co/postgres", conn_max_age=600
-    )
-}
+try:
+    if USE_SUPABASE:
+        # Use the Supabase database configuration
+        DATABASES = {
+            "default": dj_database_url.config(
+                default="postgres://postgres:XDAdF6cAk&BCcyQ@db.eafnhldbkpirnxglpxac.supabase.co/postgres",
+                conn_max_age=600
+            )
+        }
+    else:
+        # Use the SQLite database configuration for development
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
+except Exception as e:
+    print(f"Failed to connect to the primary database. Falling back to SQLite: {str(e)}")
+    # Use the SQLite database configuration for local development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # os.environ.get("DATABASE_URL")
 # XDAdF6cAk&BCcyQ
