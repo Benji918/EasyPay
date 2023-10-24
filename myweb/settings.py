@@ -24,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-g=jzhv5zv8nxar2z0jpv#jv-$o*p(+e597*wgkau$gc&7v*m4e')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1').split(",")
-SUPBASE_DB_URL = os.environ.get("SUPBASE_DB_URL")
+SUPBASE_DB_URL = os.environ.get('SUPBASE_DB_URL')
+DJANGO_ENV = os.environ.get('DJANGO_ENV')
 
 
 # Application definition
