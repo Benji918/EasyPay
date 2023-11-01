@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-g=jzhv5zv8nxar2z0jpv#jv-$o*p(+e597*wgkau$gc&7v*m4e')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1').split(",")
-SUPBASE_DB_URL = os.environ.get('SUPBASE_DB_URL')
+SUPABASE_DB_URL = os.environ.get('SUPABASE_DB_URL')
 DJANGO_ENV = os.environ.get('DJANGO_ENV')
 
 
@@ -74,11 +74,11 @@ WSGI_APPLICATION = 'myweb.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 # Check if the Supabase database URL is set
-if SUPBASE_DB_URL:
+if SUPABASE_DB_URL:
     # Use the Supabase database configuration
     DATABASES = {
         "default": dj_database_url.config(
-            default=SUPBASE_DB_URL, conn_max_age=600
+            default=SUPABASE_DB_URL, conn_max_age=600
         )
     }
 else:
